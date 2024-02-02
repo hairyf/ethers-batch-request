@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@8.14.0",
-  "description": "_description_",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "description": "Using Batch Request Queries in ethers.",
+  "author": "Hairyf <wwu710632@gamil.com>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/hairyf",
   "homepage": "https://github.com/hairyf/ethers-batch-request#readme",
@@ -13,7 +13,12 @@
     "url": "git+https://github.com/hairyf/ethers-batch-request.git"
   },
   "bugs": "https://github.com/hairyf/ethers-batch-request/issues",
-  "keywords": [],
+  "keywords": [
+    "ethers",
+    "batch-request",
+    "multicall",
+    "contract"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
