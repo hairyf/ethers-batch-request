@@ -22,7 +22,7 @@ import { providers } from 'ethers'
 const provider = new providers.JsonRpcProvider('https://...')
 const contract = new BatchContract('0x...', interface, provider)
 
-// BatchContract automatically adds tasks to a queue
+// BatchContract will automatically package into an HTTP request
 // When there are no new queries, it sends a batch request and returns all the values
 const owners = await Promise.all([
   contract.ownerOf(0),
@@ -33,6 +33,8 @@ const owners = await Promise.all([
   contract.ownerOf(5),
 ])
 ```
+
+| <img height="120" src="https://github.com/hairyf/ethers-batch-request/assets/49724027/2a07fe30-244c-4cd0-9aa1-6bb227a5b75b" /> | <img height="120"  src="https://github.com/hairyf/ethers-batch-request/assets/49724027/4d2f2c23-34ad-4787-8c20-677debcecdf6" /> |
 
 > Currently, batch querying is only supported for the Contract.
 
