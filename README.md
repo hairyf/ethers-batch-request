@@ -42,7 +42,7 @@ const owners = await Promise.all([
 
 > Currently, batch querying is only supported for the Contract.
 
-## NOTE
+## Precautions
 
 Requests in a batch request are executed in order, which means if a new block is received during execution, the subsequent results are likely to be different.
 
