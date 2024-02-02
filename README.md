@@ -6,6 +6,14 @@ This feature can be useful for reducing the load on the server and improving the
 
 `ethers-batch-request` will automatically process the queue and return the correct value:
 
+```sh
+# with pnpm
+pnpm add ethers-batch-request
+
+# with yarn
+yarn add ethers-batch-request
+```
+
 ```ts
 import { BatchContract } from 'ethers-batch-request'
 import { providers } from 'ethers'
