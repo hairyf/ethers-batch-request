@@ -22,6 +22,9 @@ export function batchContractCall<T extends Contract, K extends keyof T>(
     || provider?.provider?.connection?.url
     || provider?.providerConfigs?.[0]?.provider?.connection?.url
 
+  if (rpc === 'eip-1193:')
+    throw new Error('Wallet not supported')
+
   const data = contract.interface.encodeFunctionData(fragment, args || [])
   const index = stack.push({
     method: 'eth_call',
@@ -38,7 +41,7 @@ export function batchContractCall<T extends Contract, K extends keyof T>(
     const current = queue
     const configs = [...stack]
     stack.splice(0, index)
-    fetchBatchRequest(rpc, queue, configs)
+    fetchBatchRequest(rpc, configs)
       .then(data => emitter.emit(`calls_${current}`, data))
     queue++
   }

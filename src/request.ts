@@ -5,7 +5,7 @@ const jsonHeaders = {
   'Content-Type': 'application/json',
 }
 
-export async function fetchBatchRequest(url: string, queue: number, body: CallConfig[]) {
+export async function fetchBatchRequest(url: string, body: CallConfig[]) {
   const response = await fetch(url, {
     method: 'POST',
     headers: jsonHeaders,
