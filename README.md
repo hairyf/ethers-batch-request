@@ -34,7 +34,7 @@ const owners = await Promise.all([
 ])
 ```
 
-| <img height="120" src="https://github.com/hairyf/ethers-batch-request/assets/49724027/2a07fe30-244c-4cd0-9aa1-6bb227a5b75b" /> | <img height="120"  src="https://github.com/hairyf/ethers-batch-request/assets/49724027/4d2f2c23-34ad-4787-8c20-677debcecdf6" /> |
+<img width="50%" height="120" src="https://github.com/hairyf/ethers-batch-request/assets/49724027/2a07fe30-244c-4cd0-9aa1-6bb227a5b75b" /> <img width="49.5%" height="120"  src="https://github.com/hairyf/ethers-batch-request/assets/49724027/4d2f2c23-34ad-4787-8c20-677debcecdf6" />
 
 > Currently, batch querying is only supported for the Contract.
 
