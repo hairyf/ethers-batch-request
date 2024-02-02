@@ -51,11 +51,13 @@ export function batchContractCall<T extends Contract, K extends keyof T>(
       deferred.reject(new Error(response.error.message || 'Unknown'))
       return
     }
-    const [value] = contract.interface.decodeFunctionResult(
+    const result = contract.interface.decodeFunctionResult(
       fragment,
       response.result,
     )
-    deferred.resolve(value)
+    deferred.resolve(result.length > 1
+      ? result
+      : result[0])
   }
 
   return deferred
