@@ -1,7 +1,7 @@
 {
   "name": "ethers-batch-request",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@8.14.0",
   "description": "Using Batch Request Queries in ethers.",
   "author": "Hairyf <wwu710632@gamil.com>",
