@@ -35,10 +35,11 @@ export function batchContractCall<T extends Contract, K extends keyof T>(
   emitter.on(`calls_${queue}`, resolved)
 
   function requests() {
+    const current = queue
     const configs = [...stack]
     stack.splice(0, index)
     fetchBatchRequest(rpc, queue, configs)
-      .then(data => emitter.emit(`calls_${queue}`, data))
+      .then(data => emitter.emit(`calls_${current}`, data))
     queue++
   }
   function resolved(responses: CallResponse[]) {
