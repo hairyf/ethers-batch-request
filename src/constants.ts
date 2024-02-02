@@ -1,0 +1,16 @@
+export const SKIP_FUNCTIONS = [
+  'attach',
+  'connect',
+  'deployed',
+  'emit',
+  'on',
+  'fallback',
+  'listenerCount',
+  'listeners',
+  'off',
+  'once',
+  'connect',
+  'queryFilter',
+  'removeAllListeners',
+  'removeListener',
+]

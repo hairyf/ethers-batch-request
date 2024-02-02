@@ -1,0 +1,58 @@
+import { createDeferred } from '@hairy/utils'
+import type { Contract } from 'ethers'
+import mitt from 'mitt'
+import type { CallConfig, CallResponse } from './typings'
+import { fetchBatchRequest } from './request'
+
+const emitter = mitt<{ [key: string]: CallResponse[] }>()
+const stack: CallConfig[] = []
+let queue = 1
+let timer: null | NodeJS.Timeout
+let id = 0
+
+export function batchContractCall<T extends Contract, K extends keyof T>(
+  contract: T,
+  method: K,
+  ...args: Parameters<T[K]>
+) {
+  const deferred = createDeferred<ReturnType<T[K]>>()
+  const fragment = method as string
+  const provider = contract.provider as any
+  const rpc = provider?.connection?.url
+    || provider?.provider?.connection?.url
+    || provider?.providerConfigs?.[0]?.provider?.connection?.url
+
+  const data = contract.interface.encodeFunctionData(fragment, args || [])
+  const index = stack.push({
+    method: 'eth_call',
+    id: id++,
+    jsonrpc: '2.0',
+    params: [{ data, to: contract.address }, 'latest'],
+  })
+  timer && clearTimeout(timer)
+  timer = setTimeout(requests, 50)
+
+  emitter.on(`calls_${queue}`, resolved)
+
+  function requests() {
+    const configs = [...stack]
+    stack.splice(0, index)
+    fetchBatchRequest(rpc, queue, configs)
+      .then(data => emitter.emit(`calls_${queue}`, data))
+    queue++
+  }
+  function resolved(responses: CallResponse[]) {
+    const response = responses[index - 1]
+    if (response.error) {
+      deferred.reject(new Error(response.error.message || 'Unknown'))
+      return
+    }
+    const [value] = contract.interface.decodeFunctionResult(
+      fragment,
+      response.result,
+    )
+    deferred.resolve(value)
+  }
+
+  return deferred
+}
