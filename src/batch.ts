@@ -1,8 +1,8 @@
-import { createDeferred } from '@hairy/utils'
 import type { Contract } from 'ethers'
 import mitt from 'mitt'
 import type { CallConfig, CallResponse } from './typings'
 import { fetchBatchRequest } from './request'
+import { createDeferred } from './utils'
 
 const emitter = mitt<{ [key: string]: CallResponse[] }>()
 const stack: CallConfig[] = []
