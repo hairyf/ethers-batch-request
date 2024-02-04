@@ -51,6 +51,10 @@ export function batchContractCall<T extends Contract, K extends keyof T>(
       deferred.reject(new Error(response.error.message || 'Unknown'))
       return
     }
+    if (response.result === '0x') {
+      deferred.resolve(undefined as any)
+      return
+    }
     const result = contract.interface.decodeFunctionResult(
       fragment,
       response.result,
